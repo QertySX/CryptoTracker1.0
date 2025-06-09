@@ -26,5 +26,5 @@ async def find_crypto(request: Request, crypto_name: str):
 
     finder = FindCrypto()
     find_crypto = finder.find(crypto_name, sorted_crypto)
-    
+
     return templates.TemplateResponse("index.html", {"request": request, "data": find_crypto})
