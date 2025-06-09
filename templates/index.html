@@ -1,27 +1,111 @@
-{# templates/index.html #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Crypto Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: Arial; padding: 20px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f4f4f4; }
-        input[type="text"] { padding: 6px; width: 200px; }
-        button { padding: 6px 12px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .top-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .top-buttons a {
+            padding: 8px 14px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button, .create-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        button:hover, .create-btn:hover, .top-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 90%;
+            border-collapse: separate;
+            margin: 10px auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
-    
-    <h1>Список криптовалют</h1>
 
-    <form method="get" action="/search">
-        <label for="crypto_name">Поиск:</label>
-        <input type="text" id="crypto_name" name="crypto_name" placeholder="Введите название">
-        <button type="submit">Найти</button>
-    </form>
+    <div class="top-buttons">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+
+    <h1>Типо CoinMarketCup</h1>
+
+    <div class="search-section">
+        <form method="get" action="/search" style="display: flex; gap: 10px;">
+            <input type="text" id="crypto_name" name="crypto_name" placeholder="Введите название криптовалюты...">
+            <button type="submit">🔍 Найти</button>
+        </form>
+        <a class="create-btn" href="/portfolio"> Create Portfolio </a>
+    </div>
 
     {% if data %}
     <table>
@@ -47,7 +131,7 @@
         </tbody>
     </table>
     {% else %}
-    <p>Нет данных для отображения.</p>
+    <p style="text-align:center; font-size: 18px;">Нет данных для отображения.</p>
     {% endif %}
 
 </body>
