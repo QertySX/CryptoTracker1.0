@@ -1,0 +1,53 @@
+{# templates/index.html #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Tracker</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        input[type="text"] { padding: 6px; width: 200px; }
+        button { padding: 6px 12px; }
+    </style>
+</head>
+<body>
+    <h1>Список криптовалют</h1>
+
+    <form method="get" action="/search">
+        <label for="crypto_name">Поиск:</label>
+        <input type="text" id="crypto_name" name="crypto_name" placeholder="Введите название">
+        <button type="submit">Найти</button>
+    </form>
+
+    {% if data %}
+    <table>
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Объем 24ч</th>
+                <th>Изм. 24ч (%)</th>
+                <th>Рыночная кап.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for name, info in data.items() %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>${{ info.price | round(2) }}</td>
+                <td>${{ info.volume_24h | round(2) }}</td>
+                <td>{{ info.percent_change_24h | round(2) }}%</td>
+                <td>${{ info.market_cap | round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Нет данных для отображения.</p>
+    {% endif %}
+
+</body>
+</html>
