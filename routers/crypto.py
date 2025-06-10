@@ -6,6 +6,7 @@ from fastapi.templating import Jinja2Templates
 templates = Jinja2Templates(directory="templates")
 crypto_router = APIRouter()
 
+@app.get
 @crypto_router.get('/')
 async def index(request: Request):
     fetcher = GetCryptoData()
@@ -16,6 +17,7 @@ async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "data": sorted_crypto})
 
 
+@app.get
 @crypto_router.get('/search')
 async def find_crypto(request: Request, crypto_name: str):
     fetcher = GetCryptoData()
