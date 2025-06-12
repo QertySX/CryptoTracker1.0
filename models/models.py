@@ -28,7 +28,6 @@ class Portfolio(Base):
     total_amount: Mapped[float] = mapped_column(Float, nullable=False)
     average_buy_price: Mapped[float] = mapped_column(Float, nullable=False)
     date: Mapped[str] = mapped_column(String, nullable=False)
-
     user_id: Mapped[int] = mapped_column(ForeignKey("Users.id"), unique=True, nullable=False)
 
     # Связь
