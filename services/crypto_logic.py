@@ -1,4 +1,3 @@
-import asyncio
 from config import api_key, url
 import logging
 import aiohttp
@@ -31,13 +30,7 @@ class GetCryptoData:
             logging.error(f'[INFO] Ошибка: {e}')
 
 
-class SortStrategy:
-    '''Стратегия сортировки'''
-    def sort(self, data: dict) -> dict:
-        raise NotImplementedError()
-
-
-class SortAllCrypto(SortStrategy):
+class SortAllCrypto:
     '''Фильтрация данных по price, volume_24h, percent_change_24h, market_cap'''
     def sort(self, data: dict) -> dict:
         try:
@@ -58,17 +51,8 @@ class SortAllCrypto(SortStrategy):
         except Exception as e:
             logging.error(f'[INFO] error {e}')
 
-def apply_sort(data, strategy: SortStrategy):
-    return strategy.sort(data)
 
-
-class FinderStrategy:
-    '''Стратегия поиска'''
-    def find(self, name: str, data: dict) -> dict:
-        raise NotImplementedError()
-
-
-class FindCrypto(FinderStrategy):
+class FindCrypto:
     '''Поиск одной криптовалюты'''
     def find(self, name, data: dict) -> dict:
         try:
@@ -82,6 +66,4 @@ class FindCrypto(FinderStrategy):
             logging.error(f'[INFO] error {e}')
 
 
-def apply_find(name, data, strategy: FinderStrategy):
-    return strategy.find(name, data)
 
