@@ -3,8 +3,7 @@ from models.models import User
 import bcrypt
 
 
-
-class AddUser:
+class AddUserInDb:
     def __init__(self, username, email, password_hash):
         self.username = username
         self.email = email
