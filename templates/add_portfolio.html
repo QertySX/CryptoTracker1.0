@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Додавання активу{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f9fc;
+        color: #333;
+        padding: 20px;
+        margin: 0;
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 60px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Введіть необхідні дані</h2>
+    <form method="post" action="/portfolio/add">
+        <input type="text" name="currency" placeholder="Криптовалюта" required>
+        <input type="number" name="price" placeholder="Ціна купівлі" required>
+        <input type="number" name="total_amount" placeholder="Загальна кількість" required>
+        <input type="date" name="date" placeholder="дата" required>
+        <button type="submit">Додати криптовалюту</button>
+    </form>
+    <a href="{{ url_for('portfolio') }}" class="back-link">← Назад до портфеля</a>
+</div>
+{% endblock %}

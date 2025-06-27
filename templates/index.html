@@ -1,138 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Crypto Tracker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f9fc;
-            color: #333;
-            padding: 20px;
-            margin: 0;
-        }
+{% extends "base.html" %}
 
-        .top-buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
+{% block title %}CryptoForex Hub - Головна{% endblock %}
 
-        .top-buttons a {
-            padding: 8px 14px;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 14px;
-        }
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f9fc;
+        color: #333;
+        padding: 20px;
+        margin: 0;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .top-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
 
-        .search-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+    .top-buttons a {
+        padding: 8px 14px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 14px;
+    }
 
-        input[type="text"] {
-            padding: 10px;
-            width: 250px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        button, .create-btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-        }
+    .search-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
 
-        button:hover, .create-btn:hover, .top-buttons a:hover {
-            background-color: #0056b3;
-        }
+    input[type="text"] {
+        padding: 10px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
 
-        table {
-            width: 90%;
-            border-collapse: separate;
-            margin: 10px auto;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-        }
+    button, .create-btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+    }
 
-        th, td {
-            padding: 12px 15px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
+    button:hover, .create-btn:hover, .top-buttons a:hover {
+        background-color: #0056b3;
+    }
 
-        th {
-            background-color: #f1f1f1;
-            font-weight: bold;
-        }
+    table {
+        width: 90%;
+        border-collapse: separate;
+        margin: 10px auto;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
 
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
-<body>
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
 
-    <div class="top-buttons">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-    </div>
+    th {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
 
-    <h1>Типо CoinMarketCup</h1>
+    tr:hover {
+        background-color: #f9f9f9;
+    }
 
-    <div class="search-section">
-        <form method="get" action="/search" style="display: flex; gap: 10px;">
-            <input type="text" id="crypto_name" name="crypto_name" placeholder="Введите название криптовалюты...">
-            <button type="submit">🔍 Найти</button>
-        </form>
-        <a class="create-btn" href="/portfolio"> Create Portfolio </a>
-    </div>
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        text-decoration: none;
+        color: #007bff;
+    }
 
-    {% if data %}
-    <table>
-        <thead>
-            <tr>
-                <th>Название</th>
-                <th>Цена</th>
-                <th>Объем 24ч</th>
-                <th>Изм. 24ч (%)</th>
-                <th>Рыночная кап.</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for name, info in data.items() %}
-            <tr>
-                <td>{{ name }}</td>
-                <td>${{ info.price | round(2) }}</td>
-                <td>${{ info.volume_24h | round(2) }}</td>
-                <td>{{ info.percent_change_24h | round(2) }}%</td>
-                <td>${{ info.market_cap | round(2) }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p style="text-align:center; font-size: 18px;">Нет данных для отображения.</p>
-    {% endif %}
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
 
-</body>
-</html>
+<h1>Top-100 cryptocurrency</h1>
+
+<div class="search-section">
+    <form method="get" action="/search" style="display: flex; gap: 10px;"> 
+        <input type="text" id="crypto_name" name="crypto_name" placeholder="Уведіть назву криптовалюти...">
+        <button type="submit">Знайти</button>
+    </form>
+</div>
+
+{% if data %}
+<table>
+    <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Ціна</th>
+            <th>Об'єм 24ч</th>
+            <th>Зміни за 24ч (%)</th>
+            <th>Рыночная кап.</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for name, info in data.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>${{ info.price | round(2) }}</td>
+            <td>${{ info.volume_24h | round(2) }}</td>
+            <td>{{ info.percent_change_24h | round(2) }}%</td>
+            <td>${{ info.market_cap | round(2) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p style="text-align:center; font-size: 18px;">Немає даних для відображення</p>
+{% endif %}
+{% endblock %}
