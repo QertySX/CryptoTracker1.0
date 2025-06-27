@@ -1,4 +1,4 @@
-from sqlalchemy import String, Integer, Float, ForeignKey, Text
+from sqlalchemy import String, Integer, Float, ForeignKey, Text, Column, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -12,6 +12,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     username: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(String, nullable=False)
+    disabled = Column(Boolean, default=False)
 
     # Связи
     portfolio: Mapped["Portfolio"] = relationship(back_populates="user", uselist=False)
