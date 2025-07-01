@@ -5,6 +5,8 @@ from routers.index import home_router
 from routers.auth import auth_router
 from routers.register import reg_router
 from routers.portfolio import portfolio_route
+import uvicorn
+
 
 
 app = FastAPI()
@@ -33,4 +35,4 @@ app.include_router(auth_router)
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8010 , reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8012 , reload=True)
