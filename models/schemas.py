@@ -34,6 +34,7 @@ class AddCrypto(BaseModel):
     currency: str
     price: float
     total_amount: float
+    date: str
 
 
 
