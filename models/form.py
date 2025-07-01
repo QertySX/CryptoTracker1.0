@@ -15,5 +15,5 @@ class GetForm:
 
 class GetPortfolioForm:
     @staticmethod
-    def get_crypto_data(currency: str = Form(...), price: str = Form(...), total_amount: str = Form(...)):
-        return AddCrypto(currency=currency, price=price, total_amount=total_amount)
+    def get_crypto_data(currency = Form(...), price = Form(...), total_amount = Form(...), date = Form(...)):
+        return AddCrypto(currency=currency, price=price, total_amount=total_amount, date=date)
