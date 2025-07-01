@@ -11,17 +11,20 @@ class AddUserInDb:
         
 
     async def execute(self):
-        hashed_password = bcrypt.hashpw(
-            self.password_hash.encode('utf-8'), 
-            bcrypt.gensalt()
-        )
-        
-        async with async_session() as session:
-            new_user = User(
-                username = self.username,
-                email = self.email,
-                password_hash = hashed_password
+        try:
+            hashed_password = bcrypt.hashpw(
+                self.password_hash.encode('utf-8'), 
+                bcrypt.gensalt()
             )
-            session.add(new_user)
-            await session.commit()
-            return new_user
+            
+            async with async_session() as session:
+                new_user = User(
+                    username = self.username,
+                    email = self.email,
+                    password_hash = hashed_password
+                )
+                session.add(new_user)
+                await session.commit()
+                return new_user
+        except Exception as e:
+            print(f'[INFO] Ошибка {e}')
