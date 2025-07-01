@@ -52,6 +52,43 @@ class SortAllCrypto:
             logging.error(f'[INFO] error {e}')
 
 
+    def get_current_price(self, data: dict) -> dict:
+        '''Фильтрация данных по name, price'''
+        try:
+            crypto_data = dict()
+            if 'data' not in data:
+                return {"error": "Данные не получены"}
+            for crypto in data['data']:
+                necessary_data = {
+                    "price": crypto['quote']['USD']['price'],
+                }
+                crypto_data[crypto['name']] = necessary_data
+            return crypto_data
+
+        except Exception as e:
+            logging.error(f'[INFO] error {e}')
+
+
+    def crypto_portfolio_page(self, data) -> dict:
+        '''Фильтрация данных по Name, Price, 1h%, 24h%, 7d%, Holdings, Avg.BuyPrice, Profit/Loss, Actions'''
+        try:
+            crypto_data = dict()
+            if 'data' not in data:
+                return {"error": "Данные не получены"}
+            for crypto in data['data']:
+                necessary_data = {
+                    "price": crypto['quote']['USD']['price'],
+                    "percent_change_1h": crypto['quote']['USD']['percent_change_1h'],
+                    "percent_change_24h": crypto['quote']['USD']['percent_change_24h'],
+                    "percent_change_7d": crypto['quote']['USD']['percent_change_7d'],
+                }
+                crypto_data[crypto['name']] = necessary_data
+            return crypto_data
+        except Exception as e:
+            logging.error(f'[INFO] error {e}')
+        
+
+
 class FindCrypto:
     '''Поиск одной криптовалюты'''
     def find(self, name, data: dict) -> dict:
