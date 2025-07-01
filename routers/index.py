@@ -7,8 +7,10 @@ from services.auth_logic import get_current_active_user, get_current_user_for_pa
 from models.schemas import UserS
 from jose import jwt, JWTError
 from config import SECRET_KEY, ALGORITHM
+import logging
 
 
+logging.basicConfig(level=logging.INFO)
 templates = Jinja2Templates(directory="templates")
 home_router = APIRouter()
 
@@ -46,7 +48,7 @@ async def find_crypto(request: Request, crypto_name: str):
 
 @home_router.get('/logout', name='logout')
 async def logout(response: Response):
-    response = RedirectResponse(url="/home")
+    response = RedirectResponse(url="/login")
     response.delete_cookie(key="access_token")
-    retur
+    return response
 
