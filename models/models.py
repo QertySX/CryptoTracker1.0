@@ -2,6 +2,7 @@ from sqlalchemy import String, Integer, Float, ForeignKey, Text, Column, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
+
 Base = declarative_base()
 
 # 1. Users
@@ -27,9 +28,9 @@ class Portfolio(Base):
     crypto_currency: Mapped[str] = mapped_column(Text, nullable=False)
     buy_price: Mapped[float] = mapped_column(Float, nullable=False)
     total_amount: Mapped[float] = mapped_column(Float, nullable=False)
-    average_buy_price: Mapped[float] = mapped_column(Float, nullable=False)
     date: Mapped[str] = mapped_column(String, nullable=False)
-    user_id: Mapped[int] = mapped_column(ForeignKey("Users.id"), unique=True, nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("Users.id"), nullable=False)
+
 
     # Связь
     user: Mapped["User"] = relationship(back_populates="portfolio")
