@@ -31,7 +31,6 @@ class Portfolio(Base):
     date: Mapped[str] = mapped_column(String, nullable=False)
     user_id: Mapped[int] = mapped_column(ForeignKey("Users.id"), nullable=False)
 
-
     # Связь
     user: Mapped["User"] = relationship(back_populates="portfolio")
 
