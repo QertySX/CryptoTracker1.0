@@ -95,6 +95,13 @@
         transition: background-color 0.2s ease;
     }
 
+    .edit-link {
+        color: green;
+        cursor: pointer;
+        text-decoration: underline;
+        font-size: 1em;
+    }
+
     .add-button a:hover {
         background-color: #0056b3;
     }
@@ -121,15 +128,7 @@
     </div>
     <div class="summary-box">
         <h2>All-Time Profit</h2>
-        <p style="color:green;">+${{ all_time_profit }}</p>
-    </div>
-    <div class="summary-box">
-        <h2>Best Performer</h2>
-        <p>{{ best_performer }}</p>
-    </div>
-    <div class="summary-box">
-        <h2>Worst Performer</h2>
-        <p>{{ worst_performer }}</p>
+        <p style="color:green;">{{ all_time_profit | round(2) }}$</p>
     </div>
 </div>
 
@@ -148,28 +147,29 @@
         </tr>
     </thead>
     <tbody>
-        {% for coin in portfolio %}
+        {% for coin, data in data_table.items() %}
         <tr>
-            <td>{{ coin.name }}</td>
-            <td>${{ coin.price }}</td>
-            <td>{{ coin.change_1h }}%</td>
-            <td>{{ coin.change_24h }}%</td>
-            <td>{{ coin.change_7d }}%</td>
-            <td>{{ coin.holdings }}</td>
-            <td>${{ coin.avg_buy_price }}</td>
-            <td style="color: 
-                {% if coin.profit >= 0 %}
-                green
-                {% else %}
-                red
-                {% endif %};">
-                {{ coin.profit | round(2) }}
+            <td>{{ coin }}</td>
+            <td>${{ data.price | round(2) }}</td>
+            <td>{{ data.percent_change_1h | round(2) }}%</td>
+            <td>{{ data.percent_change_24h | round(2) }}%</td>
+            <td>{{ data.percent_change_7d | round(2) }}%</td>
+            <td>{{ data.hold | round(7) }}</td>
+            <td>{{ data.average }}</td>
+            <td>{{ data.profit_loss | round(2) }}</td>
+            <td class="actions" style="color:#eee">
+                <form action="{{ url_for('edit') }}" method="get" style="display:inline;">
+                    <input type="hidden" name="crypto_currency" value="{{ coin }}">
+                    <button type="submit">Змінити</button>
+                </form>
+
+                <form action="{{ url_for('_delete') }}" method="post" style="display:inline;">
+                    <input type="hidden" name="crypto_currency" value="{{ coin }}">
+                    <button type="submit">Видалити</button>
+                </form>
             </td>
-            <td class="actions">
-                <button>Змінити</button>
-                <button>Видалити</button>
-            </td>
-        </tr>
+
+
         {% endfor %}
     </tbody>
 </table>
