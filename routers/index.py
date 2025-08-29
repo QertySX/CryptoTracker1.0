@@ -6,7 +6,6 @@ from fastapi.templating import Jinja2Templates
 from services.auth_logic import get_current_active_user, get_current_user_for_page
 from models.schemas import UserS
 from jose import jwt, JWTError
-from config import SECRET_KEY, ALGORITHM
 import logging
 
 
