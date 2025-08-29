@@ -8,7 +8,6 @@ from routers.portfolio import portfolio_route
 import uvicorn
 
 
-
 app = FastAPI()
 
 @app.middleware("http")
@@ -23,9 +22,6 @@ async def dispatch(request: Request, call_next):
         if request.url.path.startswith('/portfolio') and exc.status_code == 401:
             return RedirectResponse(url="/login")
         raise exc
-
-
-templates = Jinja2Templates(directory="templates")
 
 app.include_router(home_router, prefix="")
 app.include_router(home_router, tags=["search"])
