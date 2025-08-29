@@ -48,6 +48,7 @@ class SortAllCrypto:
                 }
                 all_data[crypto['name']] = necessary_data
             return all_data
+            logging.info(all_data)
         except Exception as e:
             logging.error(f'[INFO] error {e}')
 
