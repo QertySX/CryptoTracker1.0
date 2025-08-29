@@ -186,7 +186,7 @@
         </div>
         <div>
             {% if user %}
-            <a href="#">Привіт, {{ user.username }}!</a>
+            <a href="#">Привіт, {{ user }}!</a>
             <a href="{{ url_for('logout') }}">Вийти</a>
             {% else %}
             <a href="{{ url_for('register') }}">Реєстрація</a>

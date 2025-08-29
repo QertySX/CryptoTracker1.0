@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Додавання активу{% endblock %}
+{% block title %}Змінення активу{% endblock %}
 
 {% block content %}
 <style>
@@ -66,12 +66,11 @@
 
 <div class="form-container">
     <h2>Введіть необхідні дані</h2>
-    <form method="post" action="/portfolio/add">
-        <input type="text" name="currency" placeholder="Криптовалюта" required>
-        <input type="number" step="any" name="price" placeholder="Ціна купівлі" required>
-        <input type="number" step="any" name="total_amount" placeholder="Загальна кількість" required>
-        <input type="date" name="date" placeholder="дата" required>
-        <button type="submit">Додати криптовалюту</button>
+    <form method="post" action="/portfolio/edit">
+        <input type="text" name="crypto_currency" placeholder="Криптовалюта" required>
+        <input type="number" step="any" name="total_amount" placeholder="Вкажіть кількість" required>
+        <input type="number" name="buy_price" placeholder="Вкажіть ціну" required>
+        <button type="submit">Змінити</button>
     </form>
     <a href="{{ url_for('portfolio') }}" class="back-link">← Назад до портфеля</a>
 </div>
