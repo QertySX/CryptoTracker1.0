@@ -37,6 +37,17 @@ class AddCrypto(BaseModel):
     date: str
 
 
+class DeleteCrypto(BaseModel):
+    crypto_currency: str
+
+
+class EditCrypto(BaseModel):
+    crypto_currency: str
+    total_amount: float
+    buy_price: float
+
+
+
 
 
 
