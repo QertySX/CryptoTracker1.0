@@ -30,11 +30,11 @@ CryptoTracker - это приложение для отслеживания кр
 
 3. *Создать файл config.py с параметрами:*
 
-API_KEY = 'your api key'
-URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
-SECRET_KEY = 'your secret key'
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE = 900
+- API_KEY = 'your api key'
+- URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+- SECRET_KEY = 'your secret key'
+- ALGORITHM = "HS256"
+- ACCESS_TOKEN_EXPIRE = 900
 
 4. *Запустить сервер:*
 
