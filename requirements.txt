@@ -1,0 +1,9 @@
+fastapi
+aiohttp
+asyncpg
+bcrypt
+cryptography
+jinja2
+logging
+sqlalchemy
+uvicorn
